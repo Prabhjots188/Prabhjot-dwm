@@ -9,7 +9,7 @@ static const unsigned int gappih    = 10;       /* horiz inner gap between windo
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
-static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
+static       int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int vertpad            = 0;       /* vertical padding of bar */
@@ -31,7 +31,7 @@ static const char *downbrightness[] = {"/usr/bin/brightnessctl","s","5%-",NULL};
 
 
 /* tagging */
-static const char *tags[] = { "󰣭", "", "󰉋", "4", "5", "6", "7", "8", "󰂯" };
+static const char *tags[] = { "󰣭 Linux Mint", " Firefox", "󰉋 Files", "4", "5", "6", "7", "8", "󰂯 Bluetooth" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -143,7 +143,8 @@ static const Key keys[] = {
         { MODKEY,                       XK_m,      spawn,          {.v = music } },
         { MODKEY,                       XK_r,      spawn,          {.v = ranger } },
         { 0,                            XK_Print,  spawn,          {.v = screenshot } },
-	
+        { 0,                            XK_Insert, spawn,          {.v = screenshot } },
+
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
