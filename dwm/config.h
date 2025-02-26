@@ -31,7 +31,7 @@ static const char *downbrightness[] = {"/usr/bin/brightnessctl","s","5%-",NULL};
 
 
 /* tagging */
-static const char *tags[] = { "linux mint", "firefox", "3", "4", "5", "6", "7", "8", "󰂯" };
+static const char *tags[] = { "󰣭 Linux Mint", " Firefox", "󰉋 Files", "4", "5", "6", "7", "8", "󰂯 Bluetooth" };
 
 static const Rule rules[] = {
 	/* xprop(1):
