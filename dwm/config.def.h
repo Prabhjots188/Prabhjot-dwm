@@ -32,7 +32,7 @@ static const char *downbrightness[] = {"/usr/bin/brightnessctl","s","5%-",NULL};
 
 /* tagging */
 static const char *tags[] = { "󰣭 Linux Mint", " Firefox", "󰉋 Files", "4", "5", "6", "7", "8", "󰂯 Bluetooth" };
-
+static const char *defaulttagapps[] = { "st", "firefox", "nautilus", NULL, NULL, NULL, NULL, NULL, NULL };
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -98,6 +98,7 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_a,      spawndefault,   {0} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },

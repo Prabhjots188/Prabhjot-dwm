@@ -218,6 +218,7 @@ static void setclientstate(Client *c, long state);
 static void setclienttagprop(Client *c);
 static void setfocus(Client *c);
 static void setfullscreen(Client *c, int fullscreen);
+static void setlasttag(int tagbit);
 static void setlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
 static void setup(void);
@@ -227,6 +228,7 @@ static void sigstatusbar(const Arg *arg);
 static void sighup(int unused);
 static void sigterm(int unused);
 static void spawn(const Arg *arg);
+static void spawndefault();
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tagtonext(const Arg *arg);
@@ -304,6 +306,9 @@ static Window root, wmcheckwin;
 /* scratchpad */
 # define SCRATCHPAD_MASK (1u << sizeof tags / sizeof * tags)
 static Client * scratchpad_last_showed = NULL;
+
+static int lastchosentag[8];
+static int previouschosentag[8];
 
 /* configuration, allows nested code to access above variables */
 #include "config.h"
@@ -1835,6 +1840,24 @@ setfullscreen(Client *c, int fullscreen)
 }
 
 void
+setlasttag(int tagbit) {
+	const int mon = selmon->num;
+	if (tagbit > 0) {
+		int i = 1, pos = 0;
+		while (!(i & tagbit)) {
+			i = i << 1;
+			++pos;
+		}
+		previouschosentag[mon] = lastchosentag[mon];
+		lastchosentag[mon] = pos;
+	} else {
+		const int tempTag = lastchosentag[mon];
+		lastchosentag[mon] = previouschosentag[mon];
+		previouschosentag[mon] = tempTag;
+	}
+}
+
+void
 setlayout(const Arg *arg)
 {
 	if (!arg || !arg->v || arg->v != selmon->lt[selmon->sellt])
@@ -2041,6 +2064,17 @@ setclienttagprop(Client *c)
 }
 
 void
+spawndefault()
+{
+	const char *app = defaulttagapps[lastchosentag[selmon->num]];
+	if (app) {
+		const char *defaultcmd[] = {app, NULL};
+		Arg a = {.v = defaultcmd};
+		spawn(&a);
+	}
+}
+
+void
 tag(const Arg *arg)
 {
 	Client *c;
@@ -2144,6 +2178,7 @@ toggleview(const Arg *arg)
 
 	if (newtagset) {
 		selmon->tagset[selmon->seltags] = newtagset;
+		setlasttag(newtagset);
 		focus(NULL);
 		arrange(selmon);
 	}
@@ -2467,6 +2502,7 @@ view(const Arg *arg)
 {
 	if ((arg->ui & TAGMASK) == selmon->tagset[selmon->seltags])
 		return;
+	setlasttag(arg->ui);
 	selmon->seltags ^= 1; /* toggle sel tagset */
 	if (arg->ui & TAGMASK)
 		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
