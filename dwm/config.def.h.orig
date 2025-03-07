@@ -31,8 +31,8 @@ static const char *downbrightness[] = {"/usr/bin/brightnessctl","s","5%-",NULL};
 
 
 /* tagging */
-static const char *tags[] = { "󰣭 Linux Mint", " Firefox", "󰉋 Files", "4", "5", "6", "7", "8", "󰂯 Bluetooth" };
-
+static const char *tags[] = { "󰣭 ", " ", "󰉋 ", "4", "5", "6", "7", "8", "󰂯 " };
+static const char *defaulttagapps[] = { "tabby", "librewolf", "nautilus", NULL, NULL, NULL, NULL, NULL, "blueman-manager" };
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -82,11 +82,11 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]  = { "./dmenu.sh", NULL }; /*rofi -show drun*/
-static const char *screenshot[]  = { "/home/prabhjot/suckless/scripts/screenshot.sh", NULL };
+static const char *screenshot[]  = { "flameshot","gui", NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *launch[]  = { "j4-dmenu-desktop", NULL };
 /*static const char *browser[]  = { "vivaldi"," --password-store=gnome-libsecret", NULL };*/
-static const char *browser[]  = { "firefox", NULL };
+static const char *browser[]  = { "librewolf", NULL };
 static const char *files[]  = { "nautilus", NULL };
 static const char *bluetooth[]  = { "blueman-manager", NULL };
 static const char *compositor[]  = { "picom", NULL };
@@ -98,6 +98,7 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_grave,      spawndefault,   {0} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },

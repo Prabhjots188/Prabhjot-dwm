@@ -94,6 +94,19 @@ static const char *powermenu[]  = { "/home/prabhjot/suckless/scripts/powermenu.s
 static const char *music[]  = { "kitty", "-e", "/usr/bin/cmus", NULL };
 static const char *ranger[]  = { "kitty", "-e", "/usr/bin/ranger", NULL };
 
+static const char *termcmd2[] = { "xterm", NULL };
+static const char *browsercmd[] = {"librewolf", NULL};
+static const char *keepassxccmd[] = {"keepassxc", NULL};
+static const char *emacscmd[] = {"emacs", NULL};
+
+Autostarttag autostarttaglist[] = {
+	{.cmd = browser, .tags = 1 << 0 },
+/*        {.cmd = keepassxccmd, .tags = 1 << 4 },
+	{.cmd = emacscmd, .tags = 1 << 7 },
+	{.cmd = termcmd2, .tags = 1 << 8 },
+	{.cmd = NULL, .tags = 0 }, */
+};
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
