@@ -10,8 +10,8 @@ static const unsigned int gappiv    = 10;       /* vert inner gap between window
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
 static       int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const int showbar            = 0;        /* 0 means no bar */
+static const int topbar             = 0;        /* 0 means bottom bar */
 static const int vertpad            = 0;       /* vertical padding of bar */
 static const int sidepad            = 0;       /* horizontal padding of bar */
 
@@ -93,17 +93,14 @@ static const char *compositor[]  = { "picom", NULL };
 static const char *powermenu[]  = { "/home/prabhjot/suckless/scripts/powermenu.sh", NULL };
 static const char *music[]  = { "kitty", "-e", "/usr/bin/cmus", NULL };
 static const char *ranger[]  = { "kitty", "-e", "/usr/bin/ranger", NULL };
-
-static const char *termcmd2[] = { "xterm", NULL };
-static const char *browsercmd[] = {"librewolf", NULL};
-static const char *keepassxccmd[] = {"keepassxc", NULL};
-static const char *emacscmd[] = {"emacs", NULL};
+static const char *liveserver[] = { "live-server","--browser=qutebrowser", NULL };
+static const char *config[] = { "kitty","-e", "vim","/home/prabhjot/suckless/dwm/config.h", NULL };
 
 Autostarttag autostarttaglist[] = {
-	{.cmd = browser, .tags = 1 << 0 },
-/*        {.cmd = keepassxccmd, .tags = 1 << 4 },
-	{.cmd = emacscmd, .tags = 1 << 7 },
-	{.cmd = termcmd2, .tags = 1 << 8 },
+	{.cmd = browser, .tags = 1 << 1 },
+    /*  {.cmd = termcmd, .tags = 1 << 0 }, */
+	{.cmd = bluetooth, .tags = 1 << 8 },
+/*	{.cmd = termcmd2, .tags = 1 << 8 },
 	{.cmd = NULL, .tags = 0 }, */
 };
 
@@ -156,9 +153,11 @@ static const Key keys[] = {
         { MODKEY|ShiftMask,             XK_p,      spawn,          {.v = powermenu } },
         { MODKEY,                       XK_m,      spawn,          {.v = music } },
         { MODKEY,                       XK_r,      spawn,          {.v = ranger } },
-        { 0,                            XK_Print,  spawn,          {.v = screenshot } },
+        { MODKEY,                       XK_slash,  spawn,          {.v = liveserver } },
+       	{ 0,                            XK_Print,  spawn,          {.v = screenshot } },
         { 0,                            XK_Insert, spawn,          {.v = screenshot } },
-
+        { MODKEY,                       XK_BackSpace, spawn,       {.v = config } }, 
+	
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -211,6 +210,6 @@ static const Button buttons[] = {
 };
 
 /* Removed key bindings */
-/*{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },*/
-/*{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },*/
-/*static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", "-nf",  "-sb",  "-sf",  NULL };*/
+/*{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", "-nf",  "-sb",  "-sf",  NULL };*/
