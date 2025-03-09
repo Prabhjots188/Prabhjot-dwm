@@ -10,7 +10,7 @@ static const unsigned int gappiv    = 10;       /* vert inner gap between window
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
 static       int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
-static const int showbar            = 0;        /* 0 means no bar */
+static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const int vertpad            = 0;       /* vertical padding of bar */
 static const int sidepad            = 0;       /* horizontal padding of bar */
@@ -94,14 +94,16 @@ static const char *powermenu[]  = { "/home/prabhjot/suckless/scripts/powermenu.s
 static const char *music[]  = { "kitty", "-e", "/usr/bin/cmus", NULL };
 static const char *ranger[]  = { "kitty", "-e", "/usr/bin/ranger", NULL };
 static const char *liveserver[] = { "live-server","--browser=qutebrowser", NULL };
-static const char *config[] = { "kitty","-e", "vim","/home/prabhjot/suckless/dwm/config.h", NULL };
+static const char *config[] = { "kitty","-e", "vim","/home/prabhjot/suckless/dwm/config.h","&&","dwal", NULL };
+static const char *sublime[] = { "/opt/sublime_text/sublime_text",NULL };
+static const char *qute[] = { "qutebrowser",NULL }; 
 
 Autostarttag autostarttaglist[] = {
 	{.cmd = browser, .tags = 1 << 1 },
-    /*  {.cmd = termcmd, .tags = 1 << 0 }, */
+        {.cmd = sublime, .tags = 1 << 3 }, 
+	{.cmd = qute, .tags = 1 << 3 },
 	{.cmd = bluetooth, .tags = 1 << 8 },
-/*	{.cmd = termcmd2, .tags = 1 << 8 },
-	{.cmd = NULL, .tags = 0 }, */
+/*	{.cmd = NULL, .tags = 0 }, */
 };
 
 static const Key keys[] = {
