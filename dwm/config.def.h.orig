@@ -3,21 +3,22 @@
 #define TERMINAL "kitty"
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
 static       int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
-static const int showbar            = 1;        /* 0 means no bar */
+static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const int vertpad            = 0;       /* vertical padding of bar */
 static const int sidepad            = 0;       /* horizontal padding of bar */
 
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=10:antialias=true:autohint=true:style=Bold,Italic", "Symbols Nerd Font:size=20:antialias=true:autohint=true" };
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=15:antialias=true:autohint=true:style=Bold,Italic", "Symbols Nerd Font:size=20:antialias=true:autohint=true" };
 static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=10:antialias=true:autohint=true";
 #include "/home/prabhjot/.cache/wal/colors-wal-dwm.h"
+
 
 
 /*audio constants */
@@ -31,8 +32,8 @@ static const char *downbrightness[] = {"/usr/bin/brightnessctl","s","5%-",NULL};
 
 
 /* tagging */
-static const char *tags[] = { "󰣭 ", " ", "󰉋 ", "4", "5", "6", "7", "8", "󰂯 " };
-static const char *defaulttagapps[] = { "tabby", "librewolf", "nautilus", NULL, NULL, NULL, NULL, NULL, "blueman-manager" };
+static const char *tags[] = { "󰣭 ", " ", " ", "󰉋 ", "5", "6", "7", "8", "󰂯" };
+static const char *defaulttagapps[] = { "tabby", "librewolf", "/opt/sublime_text/sublime_text", "nautilus", NULL, NULL, NULL, NULL, "blueman-manager" };
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -41,6 +42,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+        { NULL,      "hidden",    NULL,   SCRATCHPAD_MASK, 0, -1 },
 };
 
 /* layout(s) */
@@ -82,7 +84,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]  = { "./dmenu.sh", NULL }; /*rofi -show drun*/
-static const char *screenshot[]  = { "flameshot","gui", NULL };
+static const char *screenshot[]  = { "/home/prabhjot/suckless/scripts/screenshot.sh", NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *launch[]  = { "j4-dmenu-desktop", NULL };
 /*static const char *browser[]  = { "vivaldi"," --password-store=gnome-libsecret", NULL };*/
@@ -94,14 +96,15 @@ static const char *powermenu[]  = { "/home/prabhjot/suckless/scripts/powermenu.s
 static const char *music[]  = { "kitty", "-e", "/usr/bin/cmus", NULL };
 static const char *ranger[]  = { "kitty", "-e", "/usr/bin/ranger", NULL };
 static const char *liveserver[] = { "live-server","--browser=qutebrowser", NULL };
-static const char *config[] = { "kitty","-e", "vim","/home/prabhjot/suckless/dwm/config.h","&&","dwal", NULL };
+static const char *config[] = { "kitty","-e", "vim","/home/prabhjot/suckless/dwm/config.h", NULL };
 static const char *sublime[] = { "/opt/sublime_text/sublime_text",NULL };
 static const char *qute[] = { "qutebrowser",NULL }; 
 
 Autostarttag autostarttaglist[] = {
+	{.cmd = termcmd, .tags = 1 << 0 },
 	{.cmd = browser, .tags = 1 << 1 },
-        {.cmd = sublime, .tags = 1 << 3 }, 
-	{.cmd = qute, .tags = 1 << 3 },
+        {.cmd = sublime, .tags = 1 << 2 }, 
+	{.cmd = qute, .tags = 1 << 2 },
 	{.cmd = bluetooth, .tags = 1 << 8 },
 /*	{.cmd = NULL, .tags = 0 }, */
 };
