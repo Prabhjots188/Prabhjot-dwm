@@ -5,7 +5,6 @@
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int defaulttag= 2;        /* default tag on startup */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
@@ -16,6 +15,7 @@ static const int topbar             = 0;        /* 0 means bottom bar */
 static const int vertpad            = 0;       /* vertical padding of bar */
 static const int sidepad            = 0;       /* horizontal padding of bar */
 
+static const unsigned int defaulttag= 4;        /* default tag on startup */
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=15:antialias=true:autohint=true:style=Bold,Italic", "Symbols Nerd Font:size=20:antialias=true:autohint=true" };
 static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=10:antialias=true:autohint=true";
 #include "/home/prabhjot/.cache/wal/colors-wal-dwm.h"
@@ -104,8 +104,8 @@ static const char *qute[] = { "qutebrowser",NULL };
 Autostarttag autostarttaglist[] = {
 	{.cmd = termcmd, .tags = 1 << 0 },
 	{.cmd = browser, .tags = 1 << 1 },
-        {.cmd = sublime, .tags = 1 << 2 }, 
 	{.cmd = qute, .tags = 1 << 2 },
+        {.cmd = sublime, .tags = 1 << 2 }, 
 	{.cmd = bluetooth, .tags = 1 << 8 },
 /*	{.cmd = NULL, .tags = 0 }, */
 };
